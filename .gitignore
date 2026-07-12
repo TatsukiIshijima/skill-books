@@ -1,0 +1,11 @@
+# Claude Code が生成するローカル設定・生成物(スキルのみを管理対象にする)
+.claude/*
+!.claude/skills/
+
+# Codex のローカル生成物(スキルのみを管理対象にする)
+.codex/*
+!.codex/skills/
+
+# その他
+firebase-debug.log
+.DS_Store
