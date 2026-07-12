@@ -1,0 +1,26 @@
+{
+  "skill_name": "pr-review-triage",
+  "evals": [
+    {
+      "id": 0,
+      "name": "deps-bump",
+      "prompt": "https://github.com/TatsukiIshijima/emo-message-hub/pull/334 このPR、人間がレビューする必要があるか判定して",
+      "expected_output": "依存関係マニフェスト(package.json)の変更に該当するため、Stage 1 のルール即決で 🔴 人間レビュー必要と判定される。判定根拠に依存関係ルールが明示される。",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "unity-domain-logic",
+      "prompt": "PyoroClone の PR #35 (https://github.com/TatsukiIshijima/PyoroClone/pull/35) に人間のレビューが必要かトリアージして",
+      "expected_output": "ルール即決に該当しないため Stage 2 に進み、5軸の評価表(根拠つき)が出力される。Unity固有ルールが読み込まれる。テスト同梱の小規模ドメイン変更なので判定は 🟡 または 🟢(🔴 は過剰)。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "docs-trap",
+      "prompt": "https://github.com/TatsukiIshijima/ROS2-Unity-Robotics-Simulator/pull/16 はreadme更新だけっぽいけど、人間のレビュー省略していいか判定して",
+      "expected_output": "タイトルはreadme更新だが launch.py のコード変更が混入しているため、docsのみルールで 🟢 即決してはならない。launch.py の変更に言及したうえで Stage 2 の評価が行われる。",
+      "files": []
+    }
+  ]
+}
