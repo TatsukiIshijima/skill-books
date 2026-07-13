@@ -45,3 +45,5 @@ ln -s "$(pwd)/.agents/skills/pr-review-triage" ~/.agents/skills/pr-review-triage
 1. `.claude/skills/<スキル名>/SKILL.md` を作成する(frontmatterに `name` と `description` が必須)
 2. 補助資料は `.claude/skills/<スキル名>/references/` に置く
 3. 他の環境で使う場合は上記と同様にシンボリックリンクを張る
+
+動作検証用の1行(create-pr スキル動作確認)
