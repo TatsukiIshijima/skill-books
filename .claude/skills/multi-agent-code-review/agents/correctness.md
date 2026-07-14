@@ -2,7 +2,8 @@
 
 ## 前提
 
-適用順: `agents/_common.md`(共通の作法)→ 本指示書。観点名は `correctness`。
+適用順: `agents/_common.md`(共通の作法)→ プロジェクト設定(あれば)→ 本指示書。
+観点名は `correctness`。プロジェクト設定は `.claude/code-review/correctness.md`(任意)。
 
 ## 役割
 
