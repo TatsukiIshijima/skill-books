@@ -11,6 +11,7 @@ skill-books/
 ├── .claude/
 │   └── skills/          # Claude Code 向けスキル
 │       ├── create-pr/
+│       ├── multi-agent-code-review/
 │       └── pr-review-triage/
 └── .agents/
     └── skills/          # Codex 向けスキル
@@ -26,6 +27,7 @@ skill-books/
 # Claude Code
 ln -s "$(pwd)/.claude/skills/create-pr" ~/.claude/skills/create-pr
 ln -s "$(pwd)/.claude/skills/pr-review-triage" ~/.claude/skills/pr-review-triage
+ln -s "$(pwd)/.claude/skills/multi-agent-code-review" ~/.claude/skills/multi-agent-code-review
 
 # Codex
 ln -s "$(pwd)/.agents/skills/create-pr" ~/.agents/skills/create-pr
@@ -44,6 +46,7 @@ ln -s "$(pwd)/.agents/skills/pr-review-triage" ~/.agents/skills/pr-review-triage
 | スキル | 説明 | Claude Code | Codex |
 |---|---|---|---|
 | create-pr | 現在のブランチを push し、日本語のタイトル・本文で GitHub PR を作成する | ✅ | ✅ |
+| multi-agent-code-review | 複数観点のサブエージェントを並列起動してコードレビューする(プロジェクト固有ルールは導入先の `.claude/code-review/` で設定) | ✅ | ❌ |
 | pr-review-triage | PRに人間によるレビューが必要かを判定し、結果をPRコメントとして投稿する | ✅ | ✅ |
 
 ## スキルの追加方法
