@@ -46,7 +46,10 @@ description: 複数の観点(正確性・アーキテクチャ・セキュリテ
 ### Stage 1: プロジェクト設定の確認
 
 1. レビュー対象リポジトリの `.claude/code-review/` を確認し、観点ごとの設定ファイルの
-   有無を控える。
+   有無を控える。あわせてリポジトリの CLAUDE.md(ルート、および変更ファイルの
+   ディレクトリ配下にあるもの)を確認し、存在すればプロジェクト設定に準ずる
+   規約・制約として扱う(`.claude/code-review/` が未整備のプロジェクトでも、
+   CLAUDE.md にある規約はレビューに反映する)。
 2. ディレクトリ自体が無い場合: 「`<skill>/templates/` の雛形から `.claude/code-review/` を
    初期化できる」ことをユーザーに提案する(手順は `<skill>/templates/README.md`)。
    初期化しない場合はプロジェクト設定なしでレビューを続行する。
@@ -87,7 +90,8 @@ description: 複数の観点(正確性・アーキテクチャ・セキュリテ
 
 1. 共通の作法(最優先): <skill>/agents/_common.md
 2. プロジェクト設定(あれば): <config>/<観点>.md, ...
-3. 担当観点の指示書: <skill>/agents/<観点>.md, ...
+3. リポジトリの規約(あれば): <対象リポジトリの CLAUDE.md のパス, ...>
+4. 担当観点の指示書: <skill>/agents/<観点>.md, ...
 
 レビュー対象:
 - diff: <scratchpad>/review/diff.patch
