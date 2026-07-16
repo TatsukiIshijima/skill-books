@@ -11,7 +11,7 @@
 - 調整値の ScriptableObject 化の要否
 - 当たり判定(Physics2D Trigger)への影響
 
-## 受け入れ基準(既定)
+## 完了条件の品質ゲート(既定)
 
 - TDD(Red → Green → Refactor)で進める
 - EditMode の全テストがグリーン
