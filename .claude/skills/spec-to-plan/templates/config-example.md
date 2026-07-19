@@ -1,6 +1,6 @@
-# plan-feature プロジェクト設定の例
+# spec-to-plan プロジェクト設定の例
 
-このファイルを導入先リポジトリの `.claude/plan-feature/config.md` にコピーして編集する。
+このファイルを導入先リポジトリの `.claude/spec-to-plan/config.md` にコピーして編集する。
 すべてのセクションは任意。不要なセクションは削除してよい。
 
 以下は Unity プロジェクトでの記入例。
