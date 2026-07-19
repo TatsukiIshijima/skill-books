@@ -12,7 +12,8 @@ skill-books/
 │   └── skills/          # Claude Code 向けスキル
 │       ├── create-pr/
 │       ├── multi-agent-code-review/
-│       └── pr-review-triage/
+│       ├── pr-review-triage/
+│       └── spec-to-plan/
 └── .agents/
     └── skills/          # Codex 向けスキル
         ├── create-pr/
@@ -28,6 +29,7 @@ skill-books/
 ln -s "$(pwd)/.claude/skills/create-pr" ~/.claude/skills/create-pr
 ln -s "$(pwd)/.claude/skills/pr-review-triage" ~/.claude/skills/pr-review-triage
 ln -s "$(pwd)/.claude/skills/multi-agent-code-review" ~/.claude/skills/multi-agent-code-review
+ln -s "$(pwd)/.claude/skills/spec-to-plan" ~/.claude/skills/spec-to-plan
 
 # Codex
 ln -s "$(pwd)/.agents/skills/create-pr" ~/.agents/skills/create-pr
@@ -48,6 +50,7 @@ ln -s "$(pwd)/.agents/skills/pr-review-triage" ~/.agents/skills/pr-review-triage
 | create-pr | 現在のブランチを push し、日本語のタイトル・本文で GitHub PR を作成する | ✅ | ✅ |
 | multi-agent-code-review | 複数観点のサブエージェントを並列起動してコードレビューする(プロジェクト固有ルールは導入先の `.claude/code-review/` で設定) | ✅ | ❌ |
 | pr-review-triage | PRに人間によるレビューが必要かを判定し、結果をPRコメントとして投稿する | ✅ | ✅ |
+| spec-to-plan | 機能・タスクの要望を1問ずつ質問で詰めて仕様書・ADR・実装計画を作成する(プロジェクト固有の観点・基準は導入先の `.claude/spec-to-plan/` で設定) | ✅ | ❌ |
 
 ## スキルの追加方法
 
