@@ -13,7 +13,8 @@ skill-books/
 │       ├── create-pr/
 │       ├── multi-agent-code-review/
 │       ├── pr-review-triage/
-│       └── spec-to-plan/
+│       ├── spec-to-plan/
+│       └── sync-skill-books/
 └── .agents/
     └── skills/          # Codex 向けスキル
         ├── create-pr/
@@ -51,6 +52,33 @@ ln -s "$(pwd)/.agents/skills/pr-review-triage" ~/.agents/skills/pr-review-triage
 | multi-agent-code-review | 複数観点のサブエージェントを並列起動してコードレビューする(プロジェクト固有ルールは導入先の `.claude/code-review/` で設定) | ✅ | ❌ |
 | pr-review-triage | PRに人間によるレビューが必要かを判定し、結果をPRコメントとして投稿する | ✅ | ✅ |
 | spec-to-plan | 機能・タスクの要望を1問ずつ質問で詰めて仕様書・ADR・実装計画を作成する(プロジェクト固有の観点・基準は導入先の `.claude/spec-to-plan/` で設定) | ✅ | ❌ |
+| sync-skill-books | skill-books のスキルを導入先リポジトリにベンダリング(実コピー)して同期し、差分があれば `claude/sync-skills/*` に PR を作成する | ✅ | ❌ |
+
+## 別リポジトリへの取り込み(ベンダリング同期)
+
+Claude Code on the web のように**毎回リポジトリを fresh clone する環境**では、シンボリックリンクや
+submodule は解決に失敗しうる。この場合は `sync-skill-books` スキルで、必要なスキルを導入先リポジトリに
+**実ファイルとしてコピー(ベンダリング)** してコミットする。取り込んだスキルは実体として存在するため、
+どの環境でも確実に discover される。skill-books の更新は再同期(PR 自動作成)で追随する。
+
+導入手順(導入先リポジトリ側):
+
+1. `.claude/skills/sync-skill-books/manifest.template.json` を導入先の `scripts/skill-books.manifest.json`
+   にコピーし、`sync[].skills[]` に取り込みたいスキル名を列挙する(Codex 不要なら `.agents/skills` エントリを削除)。
+2. 導入先のルートで初回同期を実行する。
+
+   ```bash
+   node .claude/skills/sync-skill-books/sync.mjs   # 初回はマニフェストの skills を含めて手動配置後に実行
+   ```
+
+   `sync-skill-books` 自体を含めてベンダリングしておくと、以降は導入先内でこのスキルを使って自己更新できる。
+3. 取り込んだスキル一式と `scripts/skill-books.manifest.json` をコミットする。
+4. 以降の更新は `sync-skill-books` スキル(または `node .claude/skills/sync-skill-books/sync.mjs`)で行う。
+   定期実行ルーチンから呼べば、差分があるときだけ同期 PR が自動作成される。
+
+`sync.mjs` は Node.js の組み込みモジュールのみで書かれており(外部 npm 依存ゼロ)、`git` のみを
+シェルを介さず呼ぶため Windows / macOS / Linux で動作する。`--check` で差分の有無だけを終了コードで返す
+(0=差分なし / 1=差分あり / 2=エラー)。
 
 ## スキルの追加方法
 

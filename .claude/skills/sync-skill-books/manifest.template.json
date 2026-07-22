@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/TatsukiIshijima/skill-books.git",
+  "ref": "main",
+  "sync": [
+    {
+      "sourceDir": ".claude/skills",
+      "skills": ["<Claude Code 用にベンダリングしたいスキル名を列挙>"]
+    },
+    {
+      "sourceDir": ".agents/skills",
+      "skills": ["<Codex 用にベンダリングしたいスキル名を列挙。Codex 不要ならこのエントリごと削除>"]
+    }
+  ],
+  "lastSyncedCommit": ""
+}
