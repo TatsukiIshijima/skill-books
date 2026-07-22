@@ -19,9 +19,10 @@
 //   }
 //
 // 終了コード:
-//   0 = 差分なし(--check・通常実行とも)
-//   1 = 差分あり(--check: 未適用 / 通常実行: 適用済み)
-//   2 = エラー(マニフェスト不正・clone 失敗など)
+//   --check  : 0 = 差分なし / 1 = 差分あり(未適用) / 2 = エラー(マニフェスト不正・clone 失敗など)
+//   通常実行 : 0 = 成功(差分の有無を問わず) / 2 = エラー
+//     ※ 通常実行は適用に成功すれば差分の有無に関わらず 0 を返す。
+//        `node sync.mjs && ...` のようなシェル連結・CI で「成功」を誤って失敗扱いしないため。
 
 import {
   cpSync,
@@ -188,7 +189,12 @@ function main() {
   }
   for (const w of warnings) console.warn(`[sync-skill-books] 警告: ${w}`);
 
-  process.exit(changes.length > 0 ? EXIT_DIFF : EXIT_NO_DIFF);
+  // --check は「差分あり」を 1 で通知する(git diff --exit-code 相当)。
+  // 通常実行は適用の成否だけを表し、成功なら差分の有無に関わらず 0 を返す。
+  if (args.check) {
+    process.exit(changes.length > 0 ? EXIT_DIFF : EXIT_NO_DIFF);
+  }
+  process.exit(EXIT_NO_DIFF);
 }
 
 main();
