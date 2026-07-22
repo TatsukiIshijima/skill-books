@@ -132,7 +132,8 @@ function main() {
 
   try {
     try {
-      git(['clone', '--depth', '1', '--branch', ref, repository, tmp]);
+      // `--` で位置引数を終端し、repository/tmp が `-` 始まりでもオプション扱いされないようにする。
+      git(['clone', '--depth', '1', '--branch', ref, '--', repository, tmp]);
     } catch (e) {
       return fail(e.message);
     }
@@ -167,6 +168,8 @@ function main() {
     }
 
     // 差分(ファイル変更)があった通常実行のときだけ lastSyncedCommit を更新する。
+    // lastSyncedCommit は同期判定には使わない(判定は dirsEqual による内容比較)。
+    // 最後に同期した skill-books の commit を記録する情報表示・追跡用の値。
     if (!args.check && changes.length > 0) {
       manifest.lastSyncedCommit = headSha;
       writeFileSync(args.manifest, `${JSON.stringify(manifest, null, 2)}\n`);
