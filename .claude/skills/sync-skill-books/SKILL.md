@@ -36,7 +36,10 @@ skill-books のスキルを、導入先リポジトリの `.claude/skills/` / `.
 - 導入先リポジトリのルートで実行する。
 - マニフェスト(`scripts/skill-books.manifest.json`)が存在し、`repository` / `ref` / `sync[]` を持つこと。
 - `git` が利用可能で、対象の skill-books リポジトリを clone できること。
-- PR 作成には `gh` を使う。`gh auth status` で認証を確認できること。
+- PR 作成の手段(いずれか):
+  - `gh`(`gh auth status` で認証を確認できること)、または
+  - `gh` が無い環境(Claude Code on the web など)では **GitHub MCP ツール** や導入先の
+    `create-pr` スキルなど、その環境で使える PR 作成手段。手段が無ければ push まで行い PR は人間に委ねる。
 
 ---
 
@@ -106,6 +109,10 @@ git push -u origin "$(git rev-parse --abbrev-ref HEAD)"
 ```bash
 gh pr create --base <base> --title "<日本語タイトル>" --body-file <本文の一時ファイル>
 ```
+
+`gh` が使えない環境では、代わりに GitHub MCP ツールや導入先の `create-pr` スキルで
+同じ base / タイトル / 本文の PR を作成する。いずれの手段も無い場合は push 済みブランチを
+案内し、PR 作成は人間に委ねる。
 
 作成した PR の URL を報告して完了。
 
