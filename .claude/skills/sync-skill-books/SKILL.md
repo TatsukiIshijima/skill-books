@@ -66,7 +66,8 @@ node .claude/skills/sync-skill-books/sync.mjs --check
 ```bash
 git remote show origin | sed -n 's/.*HEAD branch: //p'   # <base> を検出
 git fetch origin <base>
-git checkout -b claude/sync-skills/$(date +%Y%m%d) origin/<base>
+# 同日に複数回同期しても衝突しないよう時刻まで含める
+git checkout -b claude/sync-skills/$(date +%Y%m%d-%H%M%S) origin/<base>
 ```
 
 ### 3. 同期の適用
