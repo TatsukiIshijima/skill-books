@@ -5,7 +5,7 @@
 // - 外部プロセスは `git` のみを `spawnSync(..., { shell: false })` で呼び出す
 //   (シェルコマンド・パイプは使わない)。Windows / macOS / Linux で同一挙動。
 // - 消費側リポジトリのルートで実行する想定:
-//     node .claude/skills/sync-skill-books/sync.mjs [--check] [--manifest <path>]
+//     node .agents/skills/sync-skill-books/sync.mjs [--check] [--manifest <path>]
 //
 // マニフェスト(既定 scripts/skill-books.manifest.json)の形式:
 //   {
@@ -201,7 +201,7 @@ function parseArgs(argv) {
       args.manifest = argv[++i];
       if (!args.manifest) fail('--manifest にはパスを指定してください');
     } else if (a === '--help' || a === '-h') {
-      console.log('使い方: node .claude/skills/sync-skill-books/sync.mjs [--check] [--manifest <path>]');
+      console.log('使い方: node .agents/skills/sync-skill-books/sync.mjs [--check] [--manifest <path>]');
       process.exit(EXIT_NO_DIFF);
     } else {
       fail(`不明な引数: ${a}`);
