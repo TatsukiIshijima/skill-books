@@ -26,14 +26,14 @@
       "id": 3,
       "name": "default-draft-and-body-format",
       "prompt": "skill-books リポジトリで main から `eval/create-pr-draft-test` ブランチを作成し、README 末尾に動作検証用の1行を追記して commit して。そのうえで「PRを作成して」という依頼に対応して。検証が終わったら作成した PR をクローズし、リモートブランチも削除して。",
-      "expected_output": "Draft/通常の指定が無いため Draft PR として作成され、Draft で作成した旨がユーザーに報告される。タイトル・本文は日本語。本文に「概要」「変更内容」「この変更に至った過程」「テスト内容」の4セクションが含まれ、過程には検討案と採否理由(検討の余地が無ければその旨)が簡潔に書かれている。",
+      "expected_output": "Draft/通常の指定が無いため Draft PR として作成され、Draft で作成した旨がユーザーに報告される。タイトル・本文は日本語。本文に「概要」「変更内容」「処理フロー」「この変更に至った過程」「テスト内容」の5セクションが含まれる。変更内容は「ファイル / 変更行 / 変更概要」の3列の表で、README.md の変更行に変更後の行番号(例 L60)が書かれている。処理フローは README への1行追記で処理の流れが変わらないため「処理フローの変更なし」とだけ書かれ、シーケンス図は描かれない。過程には検討案と採否理由(検討の余地が無ければその旨)が簡潔に書かれている。テスト内容は `- [x]` / `- [ ]` のチェックボックスの箇条書きになっている。",
       "files": []
     },
     {
       "id": 4,
       "name": "normal-pr-with-template",
       "prompt": "skill-books リポジトリで main から `eval/create-pr-template-test` ブランチを作成し、`.github/pull_request_template.md` を「## やったこと」「## 確認方法」の2見出し構成で追加して commit して。そのうえで「レビューをお願いしたいので通常のPRで出して」という依頼に対応して。検証が終わったら作成した PR をクローズし、リモートブランチも削除して。",
-      "expected_output": "Draft ではなく通常 PR として作成される。本文はテンプレートの見出し(やったこと/確認方法)の構成に沿いつつ、概要・変更内容・この変更に至った過程・テスト内容が適切なセクションに反映される(対応するセクションが無い項目は末尾に追記される)。",
+      "expected_output": "Draft ではなく通常 PR として作成される。本文はテンプレートの見出し(やったこと/確認方法)の構成に沿いつつ、概要・変更内容(3列の表)・処理フロー・この変更に至った過程・テスト内容(チェックボックスの箇条書き)が適切なセクションに反映される(対応するセクションが無い項目は末尾に追記される)。",
       "files": []
     },
     {
@@ -41,6 +41,13 @@
       "name": "detect-non-main-default-branch",
       "prompt": "検証用のローカルリポジトリを用意して: `mkdir -p /tmp/cpr-eval5 && cd /tmp/cpr-eval5 && git init --bare -b develop origin.git && git clone origin.git work && cd work && git commit --allow-empty -m init && git push -u origin develop && git switch -c feature/base-check && git commit --allow-empty -m 'feat: 検証用コミット'`。この状態で「PRを作成して」という依頼に対応して。",
       "expected_output": "base ブランチを main と決め打ちせず、デフォルトブランチとして develop を検出して base に使う。リモートが GitHub ではないため PR 作成(gh pr create)は失敗するが、差分確認や base の扱いは develop 基準で行われ、失敗した場合はその理由を明確に報告して停止する。",
+      "files": []
+    },
+    {
+      "id": 6,
+      "name": "change-table-and-sequence-diagram",
+      "prompt": "skill-books リポジトリで main から `eval/create-pr-flow-test` ブランチを作成し、`tests/sync-skill-books.test.mjs` の `git` ヘルパー関数を `tests/helpers/git.mjs` に新規ファイルとして切り出し、テスト側は import して呼ぶように変更して commit して。そのうえで「PRを作成して」という依頼に対応して。検証が終わったら作成した PR をクローズし、リモートブランチも削除して。",
+      "expected_output": "本文の「変更内容」が「ファイル / 変更行 / 変更概要」の3列の表になっており、`tests/helpers/git.mjs` の変更行が「新規」、`tests/sync-skill-books.test.mjs` の変更行が変更後の行範囲(例 L27-L29)で書かれている。「処理フロー」に mermaid の `sequenceDiagram` が変更前・変更後の2つのコードフェンスで含まれ、変更前はテストが git を直接呼ぶ経路、変更後は `tests/helpers/git.mjs` を経由する経路になっている。",
       "files": []
     }
   ]
