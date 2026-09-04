@@ -12,6 +12,7 @@ multi-agent-code-review スキルは、プロジェクト固有のルールを
 mkdir -p .claude/code-review
 cp <このスキルのディレクトリ>/templates/architecture.md .claude/code-review/architecture.md
 # 必要に応じて任意の設定もコピー
+cp <このスキルのディレクトリ>/templates/solution.md .claude/code-review/solution.md
 cp <このスキルのディレクトリ>/templates/maintainability.md .claude/code-review/maintainability.md
 cp <このスキルのディレクトリ>/templates/testing.md .claude/code-review/testing.md
 ```
@@ -24,6 +25,7 @@ cp <このスキルのディレクトリ>/templates/testing.md .claude/code-revi
 | ファイル | 対応する観点 | 必須? | 未設定時の動作 |
 |---|---|---|---|
 | `architecture.md` | architecture | **必須** | architecture 観点はスキップされ、レポートに「未設定」と明記される |
+| `solution.md` | solution(方案レビュー) | 任意 | README・`docs/` から目標を再構築してレビュー(精度は下がる) |
 | `maintainability.md` | maintainability | 任意 | 汎用チェックリストのみでレビュー |
 | `testing.md` | testing | 任意 | 汎用チェックリストのみでレビュー |
 | `security.md` | security | 任意 | 汎用チェックリストのみでレビュー(雛形なし。追加ルールを自由書式で書けば読まれる) |
@@ -32,7 +34,7 @@ cp <このスキルのディレクトリ>/templates/testing.md .claude/code-revi
 
 ## 独自観点(custom-*.md)の追加
 
-汎用6観点でカバーできないプロジェクト固有の観点(例: Unity のアセット変更、
+汎用観点(solution + 実装レビューの6観点)でカバーできないプロジェクト固有の観点(例: Unity のアセット変更、
 DB マイグレーション、多言語リソースの整合)は、`custom-<名前>.md` として追加できる。
 書き方は `templates/custom-example.md`(Unity アセット観点の実例)を参照。
 

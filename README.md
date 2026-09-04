@@ -56,7 +56,7 @@ ln -s "$(pwd)/.agents/skills/sync-skill-books" ~/.agents/skills/sync-skill-books
 | スキル | 説明 | Claude Code | Codex |
 |---|---|---|---|
 | create-pr | 現在のブランチを push し、日本語のタイトル・本文で GitHub PR を作成する | ✅ | ✅ |
-| multi-agent-code-review | 複数観点のサブエージェントを並列起動してコードレビューし、PR には指摘を該当コード行のインラインコメントとして投稿する(プロジェクト固有ルールは導入先の `.claude/code-review/` または `.agents/code-review/` で設定) | ✅ | ✅ |
+| multi-agent-code-review | 技術方案の妥当性(ルート結論)を先に判断したうえで、複数観点のサブエージェントを並列起動してコードレビューし、PR には指摘を該当コード行のインラインコメントとして投稿する(プロジェクト固有ルールは導入先の `.claude/code-review/` または `.agents/code-review/` で設定) | ✅ | ✅ |
 | pr-review-triage | PRに人間によるレビューが必要かを判定し、結果をPRコメントとして投稿する | ✅ | ✅ |
 | spec-to-plan | 機能・タスクの要望を1問ずつ質問で詰めて仕様書・ADR・実装計画を作成する(プロジェクト固有の観点・基準は導入先の `.claude/spec-to-plan/` または `.agents/spec-to-plan/` で設定) | ✅ | ✅ |
 | sync-skill-books | skill-books のスキルを導入先リポジトリにベンダリング(実コピー)して同期し、差分があれば環境別の `claude/sync-skills/*` または `codex/sync-skills/*` に PR を作成する | ✅ | ✅ |
