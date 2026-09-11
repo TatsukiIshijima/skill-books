@@ -12,6 +12,7 @@ skill-books/
 │   └── skills/          # Claude Code 向けスキル
 │       ├── create-pr/
 │       ├── multi-agent-code-review/
+│       ├── pr-review-guide/
 │       ├── pr-review-triage/
 │       ├── spec-to-plan/
 │       └── sync-skill-books/
@@ -19,6 +20,7 @@ skill-books/
     └── skills/          # Codex 向けスキル
         ├── create-pr/
         ├── multi-agent-code-review/
+        ├── pr-review-guide/
         ├── pr-review-triage/
         ├── spec-to-plan/
         └── sync-skill-books/
@@ -31,6 +33,7 @@ skill-books/
 ```bash
 # Claude Code
 ln -s "$(pwd)/.claude/skills/create-pr" ~/.claude/skills/create-pr
+ln -s "$(pwd)/.claude/skills/pr-review-guide" ~/.claude/skills/pr-review-guide
 ln -s "$(pwd)/.claude/skills/pr-review-triage" ~/.claude/skills/pr-review-triage
 ln -s "$(pwd)/.claude/skills/multi-agent-code-review" ~/.claude/skills/multi-agent-code-review
 ln -s "$(pwd)/.claude/skills/spec-to-plan" ~/.claude/skills/spec-to-plan
@@ -38,6 +41,7 @@ ln -s "$(pwd)/.claude/skills/sync-skill-books" ~/.claude/skills/sync-skill-books
 
 # Codex
 ln -s "$(pwd)/.agents/skills/create-pr" ~/.agents/skills/create-pr
+ln -s "$(pwd)/.agents/skills/pr-review-guide" ~/.agents/skills/pr-review-guide
 ln -s "$(pwd)/.agents/skills/pr-review-triage" ~/.agents/skills/pr-review-triage
 ln -s "$(pwd)/.agents/skills/multi-agent-code-review" ~/.agents/skills/multi-agent-code-review
 ln -s "$(pwd)/.agents/skills/spec-to-plan" ~/.agents/skills/spec-to-plan
@@ -57,6 +61,7 @@ ln -s "$(pwd)/.agents/skills/sync-skill-books" ~/.agents/skills/sync-skill-books
 |---|---|---|---|
 | create-pr | 現在のブランチを push し、日本語のタイトル・本文で GitHub PR を作成する | ✅ | ✅ |
 | multi-agent-code-review | 複数観点のサブエージェントを並列起動してコードレビューし、PR には指摘を該当コード行のインラインコメントとして投稿する(プロジェクト固有ルールは導入先の `.claude/code-review/` または `.agents/code-review/` で設定) | ✅ | ✅ |
+| pr-review-guide | PR の変更内容を、その言語・領域に不慣れなレビュアーでもコードレビューできるように噛み砕いて図解した HTML を生成する(想定読者・設計文書の所在・テストコマンドは導入先の `.claude/pr-review-guide/` または `.agents/pr-review-guide/` で設定) | ✅ | ✅ |
 | pr-review-triage | PRに人間によるレビューが必要かを判定し、結果をPRコメントとして投稿する | ✅ | ✅ |
 | spec-to-plan | 機能・タスクの要望を1問ずつ質問で詰めて仕様書・ADR・実装計画を作成する(プロジェクト固有の観点・基準は導入先の `.claude/spec-to-plan/` または `.agents/spec-to-plan/` で設定) | ✅ | ✅ |
 | sync-skill-books | skill-books のスキルを導入先リポジトリにベンダリング(実コピー)して同期し、差分があれば環境別の `claude/sync-skills/*` または `codex/sync-skills/*` に PR を作成する | ✅ | ✅ |
